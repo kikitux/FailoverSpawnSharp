@@ -64,7 +64,7 @@ namespace FailoverSpawnSharp
                 connection.Close();
                 OracleConnection.ClearPool(connection);
                 OracleConnection.ClearAllPools();
-                Console.WriteLine("Milliseconds elapsed close connection/pool\t: {0}", stopwatch.ElapsedMilliseconds);
+                Console.WriteLine("Milliseconds elapsed close connection\t\t: {0}", stopwatch.ElapsedMilliseconds);
                 stopwatch.Stop();
 
                 Console.WriteLine("Connection state\t\t\t\t: " + connection.State);
