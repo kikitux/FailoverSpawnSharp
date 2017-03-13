@@ -36,7 +36,7 @@ namespace FailoverSpawnSharp
 
         private static string DoWork()
         {
-            var connectionString = @"Data Source=SPAWN; User Id = " + Environment.GetEnvironmentVariable("spawnusername") + "; Password = " + Environment.GetEnvironmentVariable("spawnpassword") + ";";
+            var connectionString = $"Data Source=SPAWN; User Id = {Environment.GetEnvironmentVariable("spawnusername", EnvironmentVariableTarget.Machine)}; Password = {Environment.GetEnvironmentVariable("spawnpassword", EnvironmentVariableTarget.Machine)};";
 
             using (OracleConnection connection = new OracleConnection(connectionString))
             {
