@@ -42,6 +42,9 @@ namespace FailoverSpawnSharp
 
             using (OracleConnection connection = new OracleConnection(connectionString))
             {
+                // create variables
+                var dbName = new object();
+                var sysdate = new object();
                 
                 // Create new stopwatch.
                 Stopwatch stopwatch = new Stopwatch();
@@ -51,8 +54,8 @@ namespace FailoverSpawnSharp
                 Console.WriteLine("Milliseconds elapsed open connection\t\t: {0}", stopwatch.ElapsedMilliseconds);
                
                 // first run
-                var dbName = ExecuteQuery(connection, @"select lower(sys_context('userenv','db_name')) as db_name from dual");
-                var sysdate = ExecuteQuery(connection, @"select sysdate from dual");
+                dbName = ExecuteQuery(connection, @"select lower(sys_context('userenv','db_name')) as db_name from dual");
+                sysdate = ExecuteQuery(connection, @"select sysdate from dual");
                 Console.WriteLine("Milliseconds elapsed first run staments\t\t: {0}", stopwatch.ElapsedMilliseconds);
 
                 // second run
