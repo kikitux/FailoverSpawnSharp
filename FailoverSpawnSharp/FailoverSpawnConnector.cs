@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Data;
 using System.Diagnostics;
+using System.Globalization;
 
 using Oracle.ManagedDataAccess.Client;
 
@@ -16,6 +18,7 @@ namespace FailoverSpawnSharp
 
         public FailoverSpawnConnectionInfo Connect()
         {
+            FailoverSpawnConnectionInfo connectionInfo;
             using(OracleConnection connection = new OracleConnection(_connectionString))
             {
                 // create variables
@@ -25,17 +28,19 @@ namespace FailoverSpawnSharp
                 // Create new stopwatch.
                 Stopwatch stopwatch = new Stopwatch();
                 stopwatch.Start();
-
                 connection.Open();
+                
                 Console.WriteLine("Milliseconds elapsed open connection\t\t: {0}", stopwatch.ElapsedMilliseconds);
 
                 // first run
-                dbName = ExecuteQuery(connection, @"select lower(sys_context('userenv','db_name')) as db_name from dual");
+                dbName = ExecuteQuery(connection,
+                    @"select lower(sys_context('userenv','db_name')) as db_name from dual");
                 sysdate = ExecuteQuery(connection, @"select sysdate from dual");
                 Console.WriteLine("Milliseconds elapsed first run staments\t\t: {0}", stopwatch.ElapsedMilliseconds);
 
                 // second run
-                dbName = ExecuteQuery(connection, @"select lower(sys_context('userenv','db_name')) as db_name from dual");
+                dbName = ExecuteQuery(connection,
+                    @"select lower(sys_context('userenv','db_name')) as db_name from dual");
                 sysdate = ExecuteQuery(connection, @"select sysdate from dual");
                 Console.WriteLine("Milliseconds elapsed second run staments\t: {0}", stopwatch.ElapsedMilliseconds);
 
@@ -48,9 +53,14 @@ namespace FailoverSpawnSharp
 
                 Console.WriteLine("Connection state\t\t\t\t: " + connection.State);
 
-                var connectionInfo = new FailoverSpawnConnectionInfo() { ConnectionDateTime = sysdate.ToString(), DatabaseName = dbName.ToString() };
-                return connectionInfo;
+                connectionInfo = new FailoverSpawnConnectionInfo()
+                                 {
+                                     ConnectionDateTime = sysdate.ToString(),
+                                     DatabaseName = dbName.ToString(),
+                                     ConnectionState = connection.State
+                                 };
             }
+            return connectionInfo;
         }
 
         private object ExecuteQuery(OracleConnection connection, string query)
