@@ -1,4 +1,4 @@
 # TODO
 
 ## Updates
-- [ ] Add Continuous Integration 
+- [x] Add Continuous Integration - vsts
