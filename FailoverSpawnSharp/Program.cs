@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Oracle.ManagedDataAccess.Client;
 
 namespace FailoverSpawnSharp
@@ -11,6 +12,7 @@ namespace FailoverSpawnSharp
             {
                 // call DoWork()
                 Console.WriteLine(DoWork());
+                Console.WriteLine("");
                 // Sleep 5 minutes.
                 System.Threading.Thread.Sleep(5 * 60 * 1000);
             }
@@ -40,13 +42,27 @@ namespace FailoverSpawnSharp
 
             using (OracleConnection connection = new OracleConnection(connectionString))
             {
-                connection.Open();
+                // Create new stopwatch.
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
+
+                connection.Open();         
+                Console.WriteLine("Milliseconds elapsed open connection\t\t: {0}", stopwatch.ElapsedMilliseconds);
+
                 var dbName = ExecuteQuery(connection, @"select lower(sys_context('userenv','db_name')) as db_name from dual");
                 var sysdate = ExecuteQuery(connection, @"select sysdate from dual");
+
+                Console.WriteLine("Milliseconds elapsed run staments\t\t: {0}", stopwatch.ElapsedMilliseconds);
+                
                 connection.Dispose();
                 connection.Close();
                 OracleConnection.ClearPool(connection);
                 OracleConnection.ClearAllPools();
+                Console.WriteLine("Milliseconds elapsed close connection/pool\t: {0}", stopwatch.ElapsedMilliseconds);
+                stopwatch.Stop();
+
+                Console.WriteLine("Connection state\t\t\t\t: " + connection.State);
+
                 return $"[{sysdate}]: {dbName}";
             }
         }
