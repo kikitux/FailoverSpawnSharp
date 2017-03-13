@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Diagnostics;
 using Oracle.ManagedDataAccess.Client;
 
@@ -13,9 +14,19 @@ namespace FailoverSpawnSharp
             while (true)
             {
                 var connectionInfo = failoverSpawnConnector.Connect();
-                if (!string.IsNullOrEmpty(connectionInfo.DatabaseName))
-                    Console.WriteLine($"[{connectionInfo.ConnectionDateTime}]: {connectionInfo.DatabaseName}");
+
+                switch(connectionInfo.ConnectionState)
+                {
+                    case ConnectionState.Closed:
+                        Console.WriteLine($"[{connectionInfo.ConnectionDateTime}]: {connectionInfo.DatabaseName}");
+                        break;
+                    default:
+                        Console.WriteLine($"Error: ConnectionState should be {ConnectionState.Closed}, but was: {connectionInfo.ConnectionState}.");
+                        break;
+                }
+
                 Console.WriteLine("");
+
                 // Sleep 5 minutes.
                 System.Threading.Thread.Sleep(5 * 60 * 1000);
             }
