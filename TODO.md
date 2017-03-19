@@ -1,4 +1,7 @@
 # TODO
 
+- [x] Up to date
+
 ## Updates
-- [x] Add Continuous Integration - vsts
+- [x] Add Continuous Integration - teamcity - hosted at kikitux.net
+- [x] Badges
