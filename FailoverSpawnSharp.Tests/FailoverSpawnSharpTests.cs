@@ -40,7 +40,7 @@ namespace FailoverSpawnSharp.Tests
         [TestMethod]
         public void TestDBConnectiononCI()
         {        
-            if (Environment.MachineName.Equals("NUC"))
+            if (false)
             {
                 var connectionString = $"Data Source=CI; Pooling = false ; User Id = {Environment.GetEnvironmentVariable("ciusername", EnvironmentVariableTarget.User)}; Password = {Environment.GetEnvironmentVariable("cipassword", EnvironmentVariableTarget.User)};";
                 using (OracleConnection connection = new OracleConnection(connectionString))
