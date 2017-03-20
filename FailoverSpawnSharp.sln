@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FailoverSpawnSharp", "FailoverSpawnSharp\FailoverSpawnSharp.csproj", "{B76949AD-18B6-40B8-A48C-EC6AB330D316}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FailoverSpawnSharp.Tests", "FailoverSpawnSharp.Tests\FailoverSpawnSharp.Tests.csproj", "{45725A05-D60E-4D5E-A3C3-2C82B8EF8D82}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B76949AD-18B6-40B8-A48C-EC6AB330D316} = {B76949AD-18B6-40B8-A48C-EC6AB330D316}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
