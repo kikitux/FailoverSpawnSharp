@@ -6,15 +6,10 @@ Toy Project to get a working failover C# project
 # Getting Started
 
 - Visual Studio 2015
-- Set 2 enviromental variables
+- Set 3 enviromental variables
 
 ```
-spawnusername
-spawnpassword
-```
-
-to run test locally, set:
-```
-ciusername
-cipassword
+dbinstance
+dbusername
+dbpassword
 ```
