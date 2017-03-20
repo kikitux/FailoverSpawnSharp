@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConnectionStringBuilder.cs" />
     <Compile Include="FailoverSpawnConnectionInfo.cs" />
     <Compile Include="FailoverSpawnConnector.cs" />
     <Compile Include="Program.cs" />
