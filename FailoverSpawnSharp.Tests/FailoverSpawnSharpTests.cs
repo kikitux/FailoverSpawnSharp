@@ -38,7 +38,7 @@ namespace FailoverSpawnSharp.Tests
         }
 
         [TestMethod]
-        public void TestDBConnection()
+        public void TestDBConnectiononCI()
         {        
             if (Environment.MachineName.Equals("NUC"))
             {
