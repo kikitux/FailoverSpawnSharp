@@ -23,14 +23,17 @@ namespace FailoverSpawnSharp.Tests
         [TestMethod]
         public void TestVariables()
         {
-            Assert.IsNotNull(Environment.GetEnvironmentVariable("ciusername",EnvironmentVariableTarget.User));
-            Assert.IsNotNull(Environment.GetEnvironmentVariable("cipassword", EnvironmentVariableTarget.User));
+            Assert.IsNotNull(Environment.GetEnvironmentVariable("dbinstance", EnvironmentVariableTarget.Machine));
+            Assert.IsNotNull(Environment.GetEnvironmentVariable("dbusername",EnvironmentVariableTarget.Machine));
+            Assert.IsNotNull(Environment.GetEnvironmentVariable("dbpassword", EnvironmentVariableTarget.Machine));
         }
 
         [TestMethod]
         public void TestDBConnection()
         {
-            var connectionString = $"Data Source=CI; User Id = {Environment.GetEnvironmentVariable("ciusername", EnvironmentVariableTarget.User)}; Password = {Environment.GetEnvironmentVariable("cipassword", EnvironmentVariableTarget.User)};";            
+            var connectionString = $"Data Source = {Environment.GetEnvironmentVariable("dbinstance", EnvironmentVariableTarget.Machine)};" +
+                                   $"User Id = {Environment.GetEnvironmentVariable("dbusername", EnvironmentVariableTarget.Machine)}; " +
+                                   $"Password = {Environment.GetEnvironmentVariable("dbpassword", EnvironmentVariableTarget.Machine)};";            
 
             using (OracleConnection connection = new OracleConnection(connectionString))
             {
