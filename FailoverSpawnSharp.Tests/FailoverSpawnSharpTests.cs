@@ -23,14 +23,29 @@ namespace FailoverSpawnSharp.Tests
         [TestMethod]
         public void TestVariables()
         {
-            Assert.IsNotNull(Environment.GetEnvironmentVariable("ciusername",EnvironmentVariableTarget.User));
-            Assert.IsNotNull(Environment.GetEnvironmentVariable("cipassword", EnvironmentVariableTarget.User));
+
+            if (Environment.MachineName.Equals("NUC"))
+            {
+                Assert.IsNotNull(Environment.GetEnvironmentVariable("ciusername", EnvironmentVariableTarget.User));
+                Assert.IsNotNull(Environment.GetEnvironmentVariable("cipassword", EnvironmentVariableTarget.User));
+            }
+            else
+            {
+                Assert.IsNotNull(Environment.GetEnvironmentVariable("spawnusername", EnvironmentVariableTarget.Machine));
+                Assert.IsNotNull(Environment.GetEnvironmentVariable("spawnpassword", EnvironmentVariableTarget.Machine));
+            }
+           
         }
 
         [TestMethod]
         public void TestDBConnection()
         {
-            var connectionString = $"Data Source=CI; User Id = {Environment.GetEnvironmentVariable("ciusername", EnvironmentVariableTarget.User)}; Password = {Environment.GetEnvironmentVariable("cipassword", EnvironmentVariableTarget.User)};";            
+            var connectionString = $"Data Source=SPAWN; User Id = {Environment.GetEnvironmentVariable("spawnusername", EnvironmentVariableTarget.Machine)}; Password = {Environment.GetEnvironmentVariable("spawnpassword", EnvironmentVariableTarget.Machine)};";
+
+            if (Environment.MachineName.Equals("NUC"))
+            {
+                connectionString = $"Data Source=CI; User Id = {Environment.GetEnvironmentVariable("ciusername", EnvironmentVariableTarget.User)}; Password = {Environment.GetEnvironmentVariable("cipassword", EnvironmentVariableTarget.User)};";
+            }
 
             using (OracleConnection connection = new OracleConnection(connectionString))
             {
