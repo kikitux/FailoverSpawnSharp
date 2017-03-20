@@ -24,7 +24,7 @@ namespace FailoverSpawnSharp.Tests
         public void TestVariables()
         {
 
-            if (Environment.MachineName.Equals("NUC"))
+            if (Environment.MachineName.Equals("nuc"))
             {
                 Assert.IsNotNull(Environment.GetEnvironmentVariable("ciusername", EnvironmentVariableTarget.User));
                 Assert.IsNotNull(Environment.GetEnvironmentVariable("cipassword", EnvironmentVariableTarget.User));
