@@ -21,8 +21,8 @@ namespace FailoverSpawnSharp.Tests
         [TestMethod]
         public void TestVariables()
         {
-            Assert.IsNotNull(Environment.GetEnvironmentVariable("spawnusername", EnvironmentVariableTarget.Machine));
-            Assert.IsNotNull(Environment.GetEnvironmentVariable("spawnpassword", EnvironmentVariableTarget.Machine));
+            Assert.IsNotNull(Environment.GetEnvironmentVariable("spawnusername"));
+            Assert.IsNotNull(Environment.GetEnvironmentVariable("spawnpassword"));
         }
     }
 }
