@@ -30,14 +30,13 @@ namespace FailoverSpawnSharp.Tests
         [TestMethod]
         public void TestDBConnection()
         {
-            var connectionString = $"Data Source=CI; User Id = {Environment.GetEnvironmentVariable("spawnusername")}; Password = {Environment.GetEnvironmentVariable("spawnpassword")};";
-            ConnectionState resulting = ConnectionState.Broken;
+            var connectionString = $"Data Source=CI; User Id = {Environment.GetEnvironmentVariable("spawnusername")}; Password = {Environment.GetEnvironmentVariable("spawnpassword")};";            
 
             using (OracleConnection connection = new OracleConnection(connectionString))
             {
-                connection.Open();
-                resulting = connection.State;
-                Assert.AreEqual(resulting, ConnectionState.Open);
+                Assert.AreNotEqual(connection.State, ConnectionState.Open);
+                connection.Open();               
+                Assert.AreEqual(connection.State, ConnectionState.Open);
                 connection.Dispose();
                 connection.Close();
                 OracleConnection.ClearPool(connection);
