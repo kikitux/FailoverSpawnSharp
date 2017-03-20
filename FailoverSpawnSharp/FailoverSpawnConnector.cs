@@ -13,9 +13,10 @@ namespace FailoverSpawnSharp
 
         public FailoverSpawnConnector()
         {
-             _connectionString = $"Data Source={Environment.GetEnvironmentVariable("dbinstance", EnvironmentVariableTarget.User)};" +
-                                 $"User Id = {Environment.GetEnvironmentVariable("dbusername", EnvironmentVariableTarget.User)};" +
-                                 $"Password = {Environment.GetEnvironmentVariable("dbpassword", EnvironmentVariableTarget.User)};";
+             _connectionString = $"Data Source={Environment.GetEnvironmentVariable("dbinstance", EnvironmentVariableTarget.Machine)};" +
+                                 $"User Id = {Environment.GetEnvironmentVariable("dbusername", EnvironmentVariableTarget.Machine)};" +
+                                 $"Password = {Environment.GetEnvironmentVariable("dbpassword", EnvironmentVariableTarget.Machine)};" +
+                                 $"Pooling = False;";
         }
 
         public FailoverSpawnConnectionInfo Connect()

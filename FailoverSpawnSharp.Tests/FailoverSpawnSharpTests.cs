@@ -29,11 +29,12 @@ namespace FailoverSpawnSharp.Tests
         }
 
         [TestMethod]
-        public void TestDBConnection()
+        public void TestDbConnection()
         {
             var connectionString = $"Data Source = {Environment.GetEnvironmentVariable("dbinstance", EnvironmentVariableTarget.Machine)};" +
                                    $"User Id = {Environment.GetEnvironmentVariable("dbusername", EnvironmentVariableTarget.Machine)}; " +
-                                   $"Password = {Environment.GetEnvironmentVariable("dbpassword", EnvironmentVariableTarget.Machine)};";            
+                                   $"Password = {Environment.GetEnvironmentVariable("dbpassword", EnvironmentVariableTarget.Machine)};" +
+                                   $"Pooling = False;";            
 
             using (OracleConnection connection = new OracleConnection(connectionString))
             {
