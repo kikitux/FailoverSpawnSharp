@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Oracle.ManagedDataAccess.Client;
 using System.Data;
+using System.Diagnostics;
 
 namespace FailoverSpawnSharp.Tests
 {

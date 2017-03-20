@@ -13,7 +13,8 @@ namespace FailoverSpawnSharp
 
         public FailoverSpawnConnector()
         {
-             _connectionString = $"Data Source=SPAWN; User Id = {Environment.GetEnvironmentVariable("spawnusername", EnvironmentVariableTarget.Machine)}; Password = {Environment.GetEnvironmentVariable("spawnpassword", EnvironmentVariableTarget.Machine)};";
+            var connectionStringBuilder = new ConnectionStringBuilder();
+            _connectionString = connectionStringBuilder.Build();
         }
 
         public FailoverSpawnConnectionInfo Connect()
