@@ -13,3 +13,8 @@ spawnusername
 spawnpassword
 ```
 
+to run test locally, set:
+```
+ciusername
+cipassword
+```

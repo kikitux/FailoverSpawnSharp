@@ -23,14 +23,14 @@ namespace FailoverSpawnSharp.Tests
         [TestMethod]
         public void TestVariables()
         {
-            Assert.IsNotNull(Environment.GetEnvironmentVariable("spawnusername"));
-            Assert.IsNotNull(Environment.GetEnvironmentVariable("spawnpassword"));
+            Assert.IsNotNull(Environment.GetEnvironmentVariable("ciusername"));
+            Assert.IsNotNull(Environment.GetEnvironmentVariable("cipassword"));
         }
 
         [TestMethod]
         public void TestDBConnection()
         {
-            var connectionString = $"Data Source=CI; User Id = {Environment.GetEnvironmentVariable("spawnusername")}; Password = {Environment.GetEnvironmentVariable("spawnpassword")};";            
+            var connectionString = $"Data Source=CI; User Id = {Environment.GetEnvironmentVariable("ciusername")}; Password = {Environment.GetEnvironmentVariable("cipassword")};";            
 
             using (OracleConnection connection = new OracleConnection(connectionString))
             {
